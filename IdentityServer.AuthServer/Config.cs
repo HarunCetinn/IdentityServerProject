@@ -1,5 +1,7 @@
 ﻿using IdentityServer4.Models;
+using IdentityServer4.Test;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace IdentityServer.AuthServer
 {
@@ -35,6 +37,42 @@ namespace IdentityServer.AuthServer
             };
         }
 
+
+        
+
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+
+
+            return new List<IdentityResource>() {
+                new IdentityResources.OpenId(), //zorunlu olan sub id
+                new IdentityResources.Profile()
+
+            };
+        }
+
+        public static IEnumerable<TestUser> GetUsers()
+        {
+            return new List<TestUser>()
+            {
+                new TestUser
+                {
+                    SubjectId="1",Username="harun",Password="123",Claims=new List<Claim>()
+                    {
+                        new Claim("given_name","harun"),
+                        new Claim("family_name","çetin")
+                    }
+                },
+                new TestUser
+                {
+                    SubjectId="2",Username="mustafa",Password="123",Claims=new List<Claim>()
+                    {
+                        new Claim("given_name","mustafa"),
+                        new Claim("family_name","çetin")
+                    }
+                }
+            };
+        }
 
         public static IEnumerable<Client> GetClients()
         {
